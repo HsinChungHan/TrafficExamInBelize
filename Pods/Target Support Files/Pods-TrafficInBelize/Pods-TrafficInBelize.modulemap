@@ -1,0 +1,6 @@
+framework module Pods_TrafficInBelize {
+  umbrella header "Pods-TrafficInBelize-umbrella.h"
+
+  export *
+  module * { export * }
+}
