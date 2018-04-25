@@ -82,6 +82,8 @@ extension Example1ViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.walkingIndexPath = currentIndexPath
         }else if let cell = collectionView.cellForItem(at: currentIndexPath) as? UserCell{
             cell.user = user
+        }else if let cell = collectionView.cellForItem(at: currentIndexPath) as? InstructionCell{
+            cell.setupViews()
         }
         
     }
@@ -115,7 +117,11 @@ extension Example1ViewController{
 extension Example1ViewController: UserCellDelegate{
     func scrollToStart() {
         let startIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.scrollToItem(at: startIndexPath, at: .centeredHorizontally, animated: true)
+        currentIndexPath = startIndexPath
+        guard let currentIndexPath = currentIndexPath else {
+            return
+        }
+        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
     }
 }
 

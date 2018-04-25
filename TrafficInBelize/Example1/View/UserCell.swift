@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import Firebase
 import Charts
+enum Comment: String{
+    case wellDone = "Well Done😃"
+    case cheerUp = "Cheer Up😱"
+}
+
 
 protocol UserCellDelegate {
     func scrollToStart()
@@ -18,12 +23,29 @@ protocol UserCellDelegate {
 class UserCell: BasicCell {
     var userCellDelegate: UserCellDelegate?
     var scoreDataEntry: ScoreDataEntry?
+    var comment: String?{
+        didSet{
+            guard let comment = comment else {return}
+            commentLabel.text = comment
+        }
+    }
+    
     var user: BelizeUser?{
         didSet{
             guard let user = user else {return}
             setupDataEntryProperties(user: user)
+            givingComment(user: user)
         }
     }
+    
+    let commentLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 35)
+        label.textColor = UIColor.lightRed
+        label.textAlignment = .center
+        return label
+    }()
+    
     lazy var pieChartView: PieChartView = {
        let pcv = PieChartView()
         pcv.chartDescription?.text = "Score"
@@ -74,6 +96,14 @@ class UserCell: BasicCell {
         scrollToStartAndResetUserButton.clipsToBounds = true
     }
     
+    fileprivate func givingComment(user: BelizeUser){
+        if user.correct >= user.wrong{
+            comment = Comment.wellDone.rawValue
+        }else{
+            comment = Comment.cheerUp.rawValue
+        }
+    }
+    
     fileprivate func setupDataEntryProperties(user: BelizeUser){
         scoreDataEntry = ScoreDataEntry.init(correctNum: Double(user.correct), wrongNum: Double(user.wrong))
         guard let scoreDataEntry = scoreDataEntry else {return}
@@ -81,8 +111,10 @@ class UserCell: BasicCell {
         scoreDataEntry.wrongDataEntry.label = "Incorrect"
         updateChartData()
         pieChartView.alpha = 0.0
+        commentLabel.alpha = 0.0
         UIView.animate(withDuration: 3.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {[weak self] in
             self?.pieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+            self?.commentLabel.alpha = 1.0
             self?.pieChartView.alpha = 1.0
         }) { (_) in
             
@@ -91,7 +123,7 @@ class UserCell: BasicCell {
     
     fileprivate func setupPieChartView(){
         addSubview(pieChartView)
-        pieChartView.centerAnchor(superView: self, width: 350, height: 350)
+        pieChartView.centerAnchor(superView: self, width: 500, height: 500)
     }
     
     
@@ -104,9 +136,15 @@ class UserCell: BasicCell {
         pieChartView.data = chartData
     }
     
+    fileprivate func setupCommentLabel(){
+        addSubview(commentLabel)
+        commentLabel.anchor(top: nil, bottom: pieChartView.topAnchor, left: leftAnchor, right: rightAnchor, topPadding: 0, bottomPadding: 20, leftPadding: 20, rightPadding: 20, width: 0, height: 40)
+    }
     
     override func setupViews() {
         setupPieChartView()
         setupScrollToStartButton()
+        setupCommentLabel()
+        
     }
 }

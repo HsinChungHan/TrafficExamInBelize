@@ -26,6 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         window?.rootViewController = MainTabBarController()
+        
+        //讓ststusbar的字變白色，且要再infoplist中設定View controller-based status bar appearance的value為no
+        application.statusBarStyle = .lightContent
+        let statusBarView = UIView()
+        //讓statusbar的顏色變深紅色
+        statusBarView.backgroundColor = UIColor.lightRed
+        //將statusbar加入到window中
+        window?.addSubview(statusBarView)
+        
+        window?.addConstraintsWithFormat(format: "V:|[v0(20)]|", views: statusBarView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarView)
         return true
     }
 }

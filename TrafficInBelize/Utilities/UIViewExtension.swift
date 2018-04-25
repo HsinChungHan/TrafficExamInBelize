@@ -53,7 +53,34 @@ extension UIView{
             self?.transform = CGAffineTransform.identity
         }) { (_) in
         }
-            
-        
     }
+    
+    func rotateAnimation(angle: CGFloat, completion: @escaping ()->()) {
+        let rotateTransform = CGAffineTransform(rotationAngle: angle)
+        UIView.animate(withDuration: 1.0, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            self?.transform = rotateTransform
+        }) { (_) in
+            completion()
+        }
+    }
+    
+    func moveAnimation(dx: CGFloat?, completion: @escaping ()->()) {
+        let moveTransform = CGAffineTransform(translationX: dx!, y: 0)
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {[weak self] in
+            self?.transform = moveTransform
+        }) { (_) in
+            completion()
+        }
+    }
+    
+    func addConstraintsWithFormat(format: String, views: UIView...)  {
+        var viewsDictionary = [String : UIView]()
+        for(index, view) in views.enumerated(){
+            let key = "v\(index)"
+            view.translatesAutoresizingMaskIntoConstraints = false
+            viewsDictionary[key] = view
+        }
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+    
 }

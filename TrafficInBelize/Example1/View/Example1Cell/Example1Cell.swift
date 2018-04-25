@@ -126,6 +126,15 @@ class Example1Cell:  BasicCell{
         return iv
     }()
     
+    let titleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "Please select the correct traffic signal"
+        label.textColor = UIColor.darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textAlignment = .center
+        return label
+    }()
+    
     lazy var answerButtonZero: UIButton = {
         let btn = UIButton(type: .system)
         btn.tag = 0
@@ -183,6 +192,14 @@ class Example1Cell:  BasicCell{
         animationView.loopAnimation = false
         animationView.animationSpeed = 1.0
         return animationView
+    }()
+    
+    let correctImageView: UIImageView = {
+       let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "thumb")
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
     }()
     
     let correctLabel: UILabel = {
@@ -254,12 +271,18 @@ class Example1Cell:  BasicCell{
         trafficImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
+    func setupTitleLabel(){
+        addSubview(titleLabel)
+        titleLabel.anchor(top: trafficImageView.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 15, bottomPadding: 0, leftPadding: 15, rightPadding: 15, width: 0, height: 45)
+        
+    }
+    
     
     func setupButton() {
         addSubview(answerButtonZero)
         addSubview(answerButtonOne)
         addSubview(answerButtonTwo)
-        answerButtonZero.anchor(top: trafficImageView.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
+        answerButtonZero.anchor(top: titleLabel.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
         answerButtonOne.anchor(top: answerButtonZero.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
         answerButtonTwo.anchor(top: answerButtonOne.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
         answerButtonZero.layer.cornerRadius = 25
@@ -271,17 +294,16 @@ class Example1Cell:  BasicCell{
     }
     
     func setupCorrectAnimationView() {
-        addSubview(correctAnimationView)
-        correctAnimationView.anchor(top: topAnchor, bottom: nil, left: leftAnchor, right: nil, topPadding: 20, bottomPadding: 0, leftPadding: 15, rightPadding: 0, width: 50, height: 50)
-        correctAnimationView.play()
+        addSubview(correctImageView)
+        correctImageView.anchor(top: topAnchor, bottom: nil, left: leftAnchor, right: nil, topPadding: 25, bottomPadding: 0, leftPadding: 15, rightPadding: 0, width: 50, height: 50)
         addSubview(correctLabel)
-        correctLabel.anchor(top: nil, bottom: nil, left: correctAnimationView.rightAnchor, right: nil, topPadding: 0, bottomPadding: 0, leftPadding: 10, rightPadding: 0, width: 20, height: 50)
-        correctLabel.centerYAnchor.constraint(equalTo: correctAnimationView.centerYAnchor).isActive = true
+        correctLabel.anchor(top: nil, bottom: nil, left: correctImageView.rightAnchor, right: nil, topPadding: 0, bottomPadding: 0, leftPadding: 10, rightPadding: 0, width: 20, height: 50)
+        correctLabel.centerYAnchor.constraint(equalTo: correctImageView.centerYAnchor).isActive = true
     }
     
     func setupWrongAnimationView() {
         addSubview(wrongAnimationView)
-        wrongAnimationView.anchor(top: correctAnimationView.bottomAnchor, bottom: nil, left: correctAnimationView.leftAnchor, right: nil, topPadding: 0, bottomPadding: 0, leftPadding: 0, rightPadding: 0, width: 50, height: 50)
+        wrongAnimationView.anchor(top: correctImageView.bottomAnchor, bottom: nil, left: correctImageView.leftAnchor, right: nil, topPadding: 0, bottomPadding: 0, leftPadding: 0, rightPadding: 0, width: 50, height: 50)
         wrongAnimationView.play()
         addSubview(wrongLabel)
         wrongLabel.anchor(top: nil, bottom: nil, left: wrongAnimationView.rightAnchor, right: nil, topPadding: 0, bottomPadding: 0, leftPadding: 10, rightPadding: 0, width: 20, height: 50)
@@ -291,6 +313,7 @@ class Example1Cell:  BasicCell{
     
     override func setupViews() {
         setupTrafficSignView()
+        setupTitleLabel()
         setupButton()
         setupCorrectAnimationView()
         setupWrongAnimationView()
