@@ -14,6 +14,7 @@
 		C023D866208DDB3F006B555E /* star.json in Resources */ = {isa = PBXBuildFile; fileRef = C023D865208DDB3F006B555E /* star.json */; };
 		C023D868208E5532006B555E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C023D867208E5531006B555E /* GoogleService-Info.plist */; };
 		C02C0BB6208FA00500F2B127 /* ScoreDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C0BB5208FA00500F2B127 /* ScoreDataEntry.swift */; };
+		C02C0BBE2090F65300F2B127 /* timer_rory.json in Resources */ = {isa = PBXBuildFile; fileRef = C02C0BBD2090F65300F2B127 /* timer_rory.json */; };
 		C0C848C7208A4817004B3767 /* TrafficSignalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848C6208A4817004B3767 /* TrafficSignalModel.swift */; };
 		C0C848C9208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848C8208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift */; };
 		C0C848CE208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848CD208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift */; };
@@ -62,6 +63,7 @@
 		C023D865208DDB3F006B555E /* star.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = star.json; sourceTree = "<group>"; };
 		C023D867208E5531006B555E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C02C0BB5208FA00500F2B127 /* ScoreDataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDataEntry.swift; sourceTree = "<group>"; };
+		C02C0BBD2090F65300F2B127 /* timer_rory.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timer_rory.json; sourceTree = "<group>"; };
 		C0C848C6208A4817004B3767 /* TrafficSignalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficSignalModel.swift; sourceTree = "<group>"; };
 		C0C848C8208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example1VC+UICOllectionViewDelegate.swift"; sourceTree = "<group>"; };
 		C0C848CD208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		C0C848D2208A8247004B3767 /* LottieAnimationView */ = {
 			isa = PBXGroup;
 			children = (
+				C02C0BBD2090F65300F2B127 /* timer_rory.json */,
 				C0D3E28A20894A4B00E23959 /* suspects.json */,
 				C0D3E2882089482D00E23959 /* traffic_light.json */,
 				C0D3E2242086657800E23959 /* stopwatch.json */,
@@ -348,6 +351,7 @@
 				C023D868208E5532006B555E /* GoogleService-Info.plist in Resources */,
 				C0D3E2632087DE3100E23959 /* checked_done.json in Resources */,
 				C0D3E1E9208655D400E23959 /* Assets.xcassets in Resources */,
+				C02C0BBE2090F65300F2B127 /* timer_rory.json in Resources */,
 				C0D3E2612087D1A100E23959 /* cycle_animation.json in Resources */,
 				C0D3E2312087563800E23959 /* check_mark.json in Resources */,
 				C0D3E212208658AA00E23959 /* buttonOff.json in Resources */,

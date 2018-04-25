@@ -8,15 +8,20 @@
 
 import UIKit
 import Lottie
+import GameKit
 protocol Example1CellDelegate {
     func scrollToNextIndex(indexPath: IndexPath)
+}
+
+protocol GetRandomNumberDelegate {
+    func getRandomNumber() -> [Int]
 }
 
 enum AnimationViewName: String{
     case correct = "checked_done"
     case wrong = "empty_status"
     case walking = "cycle_animation"
-    case timer = "stopwatch"
+    case timer = "timer_rory"
     case crying = "crying"
     case star = "star"
 }
@@ -34,11 +39,34 @@ class Example1Cell:  BasicCell{
     }
     var trafficSign: TrafficSignal?{
         didSet{
-            trafficImageView.image = trafficSign?.signImage
-            answerButtonOne.setTitle(trafficSign?.wrongAnswer1, for: .normal)
-            answerButtonTwo.setTitle(trafficSign?.wrongAnswer2, for: .normal)
-            answerButtonThree.setTitle(trafficSign?.rightAnswer, for: .normal)
+            guard let trafficSign = trafficSign else {
+                return
+            }
+            trafficImageView.image = trafficSign.signImage
+            let allAnswers = [trafficSign.wrongAnswer1, trafficSign.wrongAnswer2, trafficSign.rightAnswer]
+//            answerButtonZero.setTitle(trafficSign?.wrongAnswer1, for: .normal)
+//            answerButtonOne.setTitle(trafficSign?.wrongAnswer2, for: .normal)
+//            answerButtonTwo.setTitle(trafficSign?.rightAnswer, for: .normal)
+            randomSetTitle(allAnsers: allAnswers)
         }
+    }
+    
+    var getRandomNumberDelegate: GetRandomNumberDelegate?
+    
+    fileprivate func randomSetTitle(allAnsers: [String]){
+        var allAnsers = allAnsers
+        getRandomNumberDelegate = self
+        guard let randomNums = getRandomNumberDelegate?.getRandomNumber() else {return}
+        let allButtons = [answerButtonZero, answerButtonOne, answerButtonTwo]
+        for index in randomNums {
+            allButtons.forEach { (btn) in
+                if btn.tag == index{
+                    btn.setTitle(allAnsers[0], for: .normal)
+                    allAnsers.removeFirst()
+                }
+            }
+        }
+        
     }
     
     var walkingIndexPath: IndexPath?{
@@ -98,8 +126,9 @@ class Example1Cell:  BasicCell{
         return iv
     }()
     
-    lazy var answerButtonOne: UIButton = {
+    lazy var answerButtonZero: UIButton = {
         let btn = UIButton(type: .system)
+        btn.tag = 0
         btn.backgroundColor = UIColor.appleGreen
         btn.setTitle("No-Entry", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -108,8 +137,9 @@ class Example1Cell:  BasicCell{
         return btn
     }()
     
-    lazy var answerButtonTwo: UIButton = {
+    lazy var answerButtonOne: UIButton = {
         let btn = UIButton(type: .system)
+        btn.tag = 1
         btn.backgroundColor = UIColor.appleGreen
         btn.setTitle("Yes-Entry", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -118,8 +148,9 @@ class Example1Cell:  BasicCell{
         return btn
     }()
     
-    lazy var answerButtonThree: UIButton = {
+    lazy var answerButtonTwo: UIButton = {
         let btn = UIButton(type: .system)
+        btn.tag = 2
         btn.backgroundColor = UIColor.appleGreen
         btn.setTitle("Stop", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -190,7 +221,7 @@ class Example1Cell:  BasicCell{
         clockAnimationView.contentMode = .scaleAspectFill
         clockAnimationView.loopAnimation = false
         clockAnimationView.animationSpeed = clockAnimationView.animationDuration/6
-        clockAnimationView.anchor(top: topAnchor, bottom: nil, left: nil, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 0, rightPadding: 10, width: 100, height: 100)
+        clockAnimationView.anchor(top: topAnchor, bottom: nil, left: nil, right: rightAnchor, topPadding: 30, bottomPadding: 0, leftPadding: 0, rightPadding: 10, width: 80, height: 80)
         
     }
     
@@ -225,18 +256,18 @@ class Example1Cell:  BasicCell{
     
     
     func setupButton() {
+        addSubview(answerButtonZero)
         addSubview(answerButtonOne)
         addSubview(answerButtonTwo)
-        addSubview(answerButtonThree)
-        answerButtonOne.anchor(top: trafficImageView.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
+        answerButtonZero.anchor(top: trafficImageView.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
+        answerButtonOne.anchor(top: answerButtonZero.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
         answerButtonTwo.anchor(top: answerButtonOne.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
-        answerButtonThree.anchor(top: answerButtonTwo.bottomAnchor, bottom: nil, left: leftAnchor, right: rightAnchor, topPadding: 20, bottomPadding: 0, leftPadding: 30, rightPadding: 30, width: 0, height: 50)
+        answerButtonZero.layer.cornerRadius = 25
+        answerButtonZero.clipsToBounds = true
         answerButtonOne.layer.cornerRadius = 25
         answerButtonOne.clipsToBounds = true
         answerButtonTwo.layer.cornerRadius = 25
         answerButtonTwo.clipsToBounds = true
-        answerButtonThree.layer.cornerRadius = 25
-        answerButtonThree.clipsToBounds = true
     }
     
     func setupCorrectAnimationView() {
@@ -263,6 +294,7 @@ class Example1Cell:  BasicCell{
         setupButton()
         setupCorrectAnimationView()
         setupWrongAnimationView()
+        
     }
 }
 
@@ -327,7 +359,7 @@ extension Example1Cell{
         wrongView.trafficSign = trafficSign
         wrongView.wrongAnswerDisappearBlackViewDelegate = self
         blackView.addSubview(wrongView)
-        wrongView.anchor(top: blackView.topAnchor, bottom: blackView.bottomAnchor, left: blackView.leftAnchor, right: blackView.rightAnchor, topPadding: 120, bottomPadding: 120, leftPadding: 10, rightPadding: 10, width: 0, height: 0)
+        wrongView.anchor(top: blackView.topAnchor, bottom: nil, left: blackView.leftAnchor, right: blackView.rightAnchor, topPadding: 120, bottomPadding: 0, leftPadding: 10, rightPadding: 10, width: 0, height: 650)
         wrongView.layer.cornerRadius = 10.0
         wrongView.clipsToBounds = true
     }
@@ -349,3 +381,19 @@ extension Example1Cell{
     
 }
 
+
+
+
+extension Example1Cell: GetRandomNumberDelegate{
+    func getRandomNumber() -> [Int]{
+        var numbers = [Int]()
+        let shuffledDistribution = GKShuffledDistribution(lowestValue: 0, highestValue: 2)
+        for _ in 0..<3 {
+            let index  = shuffledDistribution.nextInt()
+            numbers.append(index)
+        }
+        return numbers
+    }
+    
+    
+}

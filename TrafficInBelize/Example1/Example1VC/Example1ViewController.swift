@@ -17,7 +17,7 @@ enum CellID: String{
 
 
 class Example1ViewController: UIViewController {
-    var currentIndexpath: IndexPath?
+    var currentIndexPath: IndexPath?
     let trafficSigns = TrafficSignal.getTrafficSigns()
     let user = BelizeUser.init()
     
@@ -29,6 +29,7 @@ class Example1ViewController: UIViewController {
         cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
+        cv.isScrollEnabled = false
         return cv
     }()
     fileprivate func registerCell(){

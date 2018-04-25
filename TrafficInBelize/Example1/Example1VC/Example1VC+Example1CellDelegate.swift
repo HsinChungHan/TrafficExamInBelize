@@ -16,6 +16,6 @@ extension Example1ViewController: Example1CellDelegate{
         }
         let newIndexPath = IndexPath(item: newIndexItem, section: 0)
         collectionView.scrollToItem(at: newIndexPath, at: .init(rawValue: 0), animated: true)
-        currentIndexpath = newIndexPath
+        currentIndexPath = newIndexPath
     }
 }

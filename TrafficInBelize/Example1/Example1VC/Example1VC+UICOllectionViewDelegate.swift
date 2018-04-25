@@ -23,7 +23,7 @@ extension Example1ViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.instructionCellID.rawValue, for: indexPath) as! InstructionCell
-            collectionView.isScrollEnabled = true
+            cell.instructionCellDelegate = self
             return cell
         }else if indexPath.item < 7{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.example1CellID.rawValue, for: indexPath) as! Example1Cell
@@ -68,7 +68,7 @@ extension Example1ViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         //程式自動滾動後會觸發此function
-        guard let currentIndexPath = currentIndexpath else {return}
+        guard let currentIndexPath = currentIndexPath else {return}
         if let cell = collectionView.cellForItem(at: currentIndexPath) as? Example1Cell {
             cell.setupClockAnimationView()
             cell.layoutIfNeeded()
@@ -116,6 +116,16 @@ extension Example1ViewController: UserCellDelegate{
     func scrollToStart() {
         let startIndexPath = IndexPath(item: 0, section: 0)
         collectionView.scrollToItem(at: startIndexPath, at: .centeredHorizontally, animated: true)
+    }
+}
+
+
+
+extension Example1ViewController: InstructionCellDelegate{
+    func scrollToNextCell() {
+        currentIndexPath = IndexPath(item: 1, section: 0)
+        guard let currentIndexPath = currentIndexPath else {return}
+        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
     }
     
     

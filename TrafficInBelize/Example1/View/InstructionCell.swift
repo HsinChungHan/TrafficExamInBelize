@@ -8,8 +8,14 @@
 
 import UIKit
 import Lottie
+protocol InstructionCellDelegate {
+    func scrollToNextCell()
+}
+
+
 class InstructionCell: BasicCell {
     let animationName = "suspects"
+    var instructionCellDelegate: InstructionCellDelegate?
     lazy var trafficLightAnimationView: LOTAnimationView = {
         let animationView = LOTAnimationView()
         animationView.setAnimation(named: animationName)
@@ -21,30 +27,52 @@ class InstructionCell: BasicCell {
         return animationView
     }()
     
-    let pinkGreenView: UIView = {
+    let coverImageView: UIImageView = {
+       let imgView = UIImageView()
+        imgView.image = #imageLiteral(resourceName: "trafficCover")
+        imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
+        return imgView
+    }()
+    
+    lazy var pinkGreenView: UIView = {
        let view = UIView()
         view.backgroundColor = UIColor.appleGreen
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         return view
     }()
+    
+    @objc func handleTap(){
+        instructionCellDelegate?.scrollToNextCell()
+    }
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        label.text = "Scroll to next!"
+        label.font = UIFont.boldSystemFont(ofSize: 45)
+        label.text = "Click to start!!"
         label.textAlignment = .center
         return label
     }()
     
     
     
-    override func setupViews() {
+    fileprivate func setupPinkGreenView() {
         addSubview(pinkGreenView)
         pinkGreenView.anchor(top: nil, bottom: bottomAnchor, left: leftAnchor, right: rightAnchor, topPadding: 0, bottomPadding: 0, leftPadding: 0, rightPadding: 0, width: 0, height: 200)
         pinkGreenView.addSubview(titleLabel)
-        titleLabel.centerAnchor(superView: pinkGreenView, width: 300, height: 20)
-        addSubview(trafficLightAnimationView)
-        trafficLightAnimationView.anchor(top: nil, bottom: pinkGreenView.topAnchor, left: nil, right: nil, topPadding: 0, bottomPadding: 20, leftPadding: 0, rightPadding: 0, width: 250, height: 250)
-        trafficLightAnimationView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        titleLabel.centerAnchor(superView: pinkGreenView, width: 300, height: 50)
+        titleLabel.minimizeAnimation(scaleX: 0.8, scaleY: 0.8)
+    }
+    
+    fileprivate func setupCoverImageView() {
+        addSubview(coverImageView)
+        coverImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        coverImageView.anchor(top: topAnchor , bottom: pinkGreenView.topAnchor, left: leftAnchor, right: rightAnchor, topPadding: 30 + 10, bottomPadding: 10, leftPadding: 10, rightPadding: 10, width: 0, height: 0)
+    }
+    
+    override func setupViews() {
+        setupPinkGreenView()
+        setupCoverImageView()
     }
 }
