@@ -29,6 +29,13 @@ extension Example1ViewController: UICollectionViewDataSource, UICollectionViewDe
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.example1CellID.rawValue, for: indexPath) as! Example1Cell
             cell.trafficSign = trafficSigns[indexPath.item - 1]
             return cell
+        }else if indexPath.item == 7{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.projectInstroductionCellID.rawValue, for: indexPath) as! ProjectIntroductionCell
+            return cell
+        }else if indexPath.item > 7 && indexPath.item < 12{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.example1CellID.rawValue, for: indexPath) as! Example1Cell
+            cell.trafficSign = trafficSigns[indexPath.item - 1]
+            return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID.userCellID.rawValue, for: indexPath) as! UserCell
             cell.userCellDelegate = self
@@ -84,6 +91,9 @@ extension Example1ViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.user = user
         }else if let cell = collectionView.cellForItem(at: currentIndexPath) as? InstructionCell{
             cell.setupViews()
+        }else if let cell = collectionView.cellForItem(at: currentIndexPath) as? ProjectIntroductionCell{
+            cell.instructionCellDelegate = self
+            cell.setupViews()
         }
         
     }
@@ -129,9 +139,9 @@ extension Example1ViewController: UserCellDelegate{
 
 extension Example1ViewController: InstructionCellDelegate{
     func scrollToNextCell() {
-        currentIndexPath = IndexPath(item: 1, section: 0)
         guard let currentIndexPath = currentIndexPath else {return}
-        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
+        self.currentIndexPath = IndexPath(item: currentIndexPath.item + 1, section: 0)
+        collectionView.scrollToItem(at: self.currentIndexPath!, at: .centeredHorizontally, animated: true)
     }
     
     

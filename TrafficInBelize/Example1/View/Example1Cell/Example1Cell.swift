@@ -24,6 +24,7 @@ enum AnimationViewName: String{
     case timer = "timer_rory"
     case crying = "crying"
     case star = "star"
+    case timeUp = "emoji_shock"
 }
 
 
@@ -83,7 +84,6 @@ class Example1Cell:  BasicCell{
         didSet{
             guard let limitedTime = limitedTime else {return}
             self.timeLabel.text = String(limitedTime)
-            print("var limitedTime:",limitedTime)
         }
     }
     
@@ -362,7 +362,7 @@ extension Example1Cell{
             checkAnimationView.play(toProgress: 0.3) {[weak self] (_) in
                 self?.checkAnimationView.removeFromSuperview()
                 guard let blackView = self?.blackView else {return}
-                self?.setWrongBackgroundView(blackView: blackView)
+                self?.setWrongBackgroundView(blackView: blackView, isTimeUp: false)
             }
             
             guard let user = user else {return}
@@ -377,8 +377,9 @@ extension Example1Cell{
         return false
     }
     
-    fileprivate func setWrongBackgroundView(blackView: UIView){
+    fileprivate func setWrongBackgroundView(blackView: UIView, isTimeUp: Bool){
         let wrongView = WrongAswerView()
+        wrongView.isTimeUp = isTimeUp
         wrongView.trafficSign = trafficSign
         wrongView.wrongAnswerDisappearBlackViewDelegate = self
         blackView.addSubview(wrongView)
@@ -394,11 +395,11 @@ extension Example1Cell{
         addBlackView(window, blackView)
         window.addSubview(checkAnimationView)
         checkAnimationView.centerAnchor(superView: window, width: 250, height: 250)
-        checkAnimationView.setAnimation(named: AnimationViewName.wrong.rawValue)
-        checkAnimationView.play(toProgress: 0.3) { [weak self] (_) in
+        checkAnimationView.setAnimation(named: AnimationViewName.timeUp.rawValue)
+        checkAnimationView.play(toProgress: 0.7) { [weak self] (_) in
             self?.checkAnimationView.removeFromSuperview()
             guard let blackView = self?.blackView else {return}
-            self?.setWrongBackgroundView(blackView: blackView)
+            self?.setWrongBackgroundView(blackView: blackView, isTimeUp: true)
         }
     }
     

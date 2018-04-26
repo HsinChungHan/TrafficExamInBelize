@@ -11,8 +11,8 @@ import UIKit
 import Firebase
 import Charts
 enum Comment: String{
-    case wellDone = "Well Done😃"
-    case cheerUp = "Cheer Up😱"
+    case wellDone = "Well done, you finish all questions 😃"
+    case cheerUp = "Cheer up 😱"
 }
 
 

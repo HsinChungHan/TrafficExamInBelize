@@ -14,6 +14,14 @@ protocol WrongAnswerDisappearBlackViewDelegate {
 }
 
 class WrongAswerView: BasicView {
+    var isTimeUp: Bool?{
+        didSet{
+            guard let isTimeUp = isTimeUp else {return}
+            if isTimeUp{
+                captionLabel.text =  "Time's up, bro 😰"
+            }
+        }
+    }
     var trafficSign: TrafficSignal?{
         didSet{
            trafficSignView.image = trafficSign?.signImage
@@ -26,7 +34,7 @@ class WrongAswerView: BasicView {
 
     let captionLabel: UILabel = {
        let label = UILabel()
-        label.text = "You Wrong 😭😜"
+        label.text = "You're Wrong 😭"
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.textColor = UIColor.darkBlueColor
         label.textAlignment = .center

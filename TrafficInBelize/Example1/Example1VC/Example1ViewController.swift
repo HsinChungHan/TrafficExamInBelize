@@ -12,12 +12,13 @@ enum CellID: String{
     case example1CellID = "Example1CellID"
     case instructionCellID = "InstructionCellID"
     case userCellID = "UserCellID"
+    case projectInstroductionCellID = "ProjectInstroductionCellID"
 }
 
 
 
 class Example1ViewController: UIViewController {
-    var currentIndexPath: IndexPath?
+    var currentIndexPath: IndexPath? = IndexPath(item: 0, section: 0)
     let trafficSigns = TrafficSignal.getTrafficSigns()
     let user = BelizeUser.init()
     
@@ -36,6 +37,7 @@ class Example1ViewController: UIViewController {
         collectionView.register(Example1Cell.self, forCellWithReuseIdentifier: CellID.example1CellID.rawValue)
         collectionView.register(InstructionCell.self, forCellWithReuseIdentifier: CellID.instructionCellID.rawValue)
         collectionView.register(UserCell.self, forCellWithReuseIdentifier: CellID.userCellID.rawValue)
+        collectionView.register(ProjectIntroductionCell.self, forCellWithReuseIdentifier: CellID.projectInstroductionCellID.rawValue)
     }
     
     fileprivate func setupCollectionView(){

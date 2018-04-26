@@ -15,6 +15,8 @@
 		C023D868208E5532006B555E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C023D867208E5531006B555E /* GoogleService-Info.plist */; };
 		C02C0BB6208FA00500F2B127 /* ScoreDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C0BB5208FA00500F2B127 /* ScoreDataEntry.swift */; };
 		C02C0BBE2090F65300F2B127 /* timer_rory.json in Resources */ = {isa = PBXBuildFile; fileRef = C02C0BBD2090F65300F2B127 /* timer_rory.json */; };
+		C02C0BC420913C5300F2B127 /* emoji_shock.json in Resources */ = {isa = PBXBuildFile; fileRef = C02C0BC320913C5300F2B127 /* emoji_shock.json */; };
+		C02C0BC620922BB800F2B127 /* ProjectIntroductionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C0BC520922BB800F2B127 /* ProjectIntroductionCell.swift */; };
 		C0C848C7208A4817004B3767 /* TrafficSignalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848C6208A4817004B3767 /* TrafficSignalModel.swift */; };
 		C0C848C9208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848C8208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift */; };
 		C0C848CE208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C848CD208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift */; };
@@ -64,6 +66,8 @@
 		C023D867208E5531006B555E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C02C0BB5208FA00500F2B127 /* ScoreDataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDataEntry.swift; sourceTree = "<group>"; };
 		C02C0BBD2090F65300F2B127 /* timer_rory.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timer_rory.json; sourceTree = "<group>"; };
+		C02C0BC320913C5300F2B127 /* emoji_shock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji_shock.json; sourceTree = "<group>"; };
+		C02C0BC520922BB800F2B127 /* ProjectIntroductionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectIntroductionCell.swift; sourceTree = "<group>"; };
 		C0C848C6208A4817004B3767 /* TrafficSignalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficSignalModel.swift; sourceTree = "<group>"; };
 		C0C848C8208A74EC004B3767 /* Example1VC+UICOllectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example1VC+UICOllectionViewDelegate.swift"; sourceTree = "<group>"; };
 		C0C848CD208A7A1E004B3767 /* Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Example1Cell+WrongAnswerDisappearBlackViewDelegate.swift"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				C0D3E2862089454300E23959 /* InstructionCell.swift */,
 				C0D3E2322087A28400E23959 /* WrongAswerView.swift */,
 				C023D861208DD6A3006B555E /* UserCell.swift */,
+				C02C0BC520922BB800F2B127 /* ProjectIntroductionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				C0D3E2602087D1A100E23959 /* cycle_animation.json */,
 				C0D3E2302087563800E23959 /* check_mark.json */,
 				C0D3E2622087DE3100E23959 /* checked_done.json */,
+				C02C0BC320913C5300F2B127 /* emoji_shock.json */,
 				C023D863208DDB35006B555E /* crying.json */,
 				C023D865208DDB3F006B555E /* star.json */,
 			);
@@ -347,6 +353,7 @@
 				C0D3E2252086657800E23959 /* stopwatch.json in Resources */,
 				C0D3E28B20894A4C00E23959 /* suspects.json in Resources */,
 				C0D3E210208658AA00E23959 /* buttonOn.json in Resources */,
+				C02C0BC420913C5300F2B127 /* emoji_shock.json in Resources */,
 				C0D3E1EC208655D400E23959 /* LaunchScreen.storyboard in Resources */,
 				C023D868208E5532006B555E /* GoogleService-Info.plist in Resources */,
 				C0D3E2632087DE3100E23959 /* checked_done.json in Resources */,
@@ -432,6 +439,7 @@
 				C0C848D4208A830E004B3767 /* Example1VC+Example1CellDelegate.swift in Sources */,
 				C0D3E2872089454300E23959 /* InstructionCell.swift in Sources */,
 				C0D3E1E2208655D200E23959 /* AppDelegate.swift in Sources */,
+				C02C0BC620922BB800F2B127 /* ProjectIntroductionCell.swift in Sources */,
 				C0D3E20C208658A000E23959 /* Example1ViewController.swift in Sources */,
 				C0D3E2062086588A00E23959 /* UIColorExtension.swift in Sources */,
 				C0D3E2052086588A00E23959 /* UIViewExtension.swift in Sources */,
